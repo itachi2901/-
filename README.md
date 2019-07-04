@@ -55,3 +55,6 @@
 ##### ドキュメントの管理方法
 
 https://pocket9.net/pocketdoc/func
+
+##### 英単語まとめ
+https://qiita.com/Ted-HM/items/7dde25dcffae4cdc7923
