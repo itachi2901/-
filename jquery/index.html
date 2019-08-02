@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Basic</title>
+    <style>
+        .myStyle {
+            boder: 5px solid green;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+<p>jQueryの復習</p>
+
+<ul id="main">
+    <li>0</li>
+    <li class="item">1</li>
+    <li>2</li>
+    <li>
+        3
+        <ul id="sub">
+            <li>3-0</li>
+            <li>3-1</li>
+            <li class="item">3-2</li>
+            <li class="item">3-3</li>
+            <li>3-4</li>
+        </ul>
+    </li>
+</ul>
+<p><a href="http://google.com">Google</a></p>
+<p><a href="http://yahoo.com">yahoo</a></p>
+<p><a href="http://youtube.com">Youtube</a></p>
+
+
+<a href="http://youtube.com" data-sitename="youtube">Youtube</a>
+<input type="text" value="hello">
+
+
+<div id="box" style="width: 100px;height: 100px; background: red;"></div>
+
+<!--<button>Add!</button>-->
+
+<button> もっと読む</button>
+<div id="result"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script>
+    // 初めてのJQUERY
+    // $(document).ready(function(){
+    //
+    // });
+    // セレクター：処理対象となるDom要件を設定する記法
+    // メソッド：処理
+    // メソッドチェーそ
+    $('p').css('color', 'red').hide('slow');
+
+
+    // idやclassを指定してみよう
+    $(function(){
+        // セレクター・メソッド
+        // $("")
+        // html条件　p h1 ul
+        // id #main
+        // class .item
+        $(".item").css('color', 'red');
+    });
+
+    // もっとセレクタを使ってみよう
+    $(function(){
+        // セレクタ・メソッド
+        // # .
+        // >　直下の子要素
+        // それ以下の要素
+        // ,　複数の要素
+        // +　隣接する要素
+        $("#main > .item").css('color', 'red');
+
+        $("#main .item").css('color', 'red');
+
+        // 隣アイテムをselected
+        $(".item + .item").css('color', 'red');
+
+    });
+
+    // フィルタを使ってみよう
+    $(function(){
+        // セレクタ・メソッド
+        // eq()
+        // :gt(), :lt()
+        // :even, :odd
+        // :contains()
+        // :first, :last
+        $("#sub > li:eq(2)").css('color', 'red');
+
+    });
+
+    // メソッドを使ったDOM要素指定
+    $(function(){
+        // セレクタ・メソッド
+        // メソッドを使ったDOM要素の設定
+        // parent(), children()
+        // next(), prev()
+        // siblings() - 兄弟要素
+        $("#sub").parent().css('color', 'red');
+
+    });
+
+    // 属性セレクタを使ってみよう
+    $(function(){
+        // セレクタ・メソッド
+        // 属性セレクタ
+        $('a[href="http://google.com"]').css('background', 'red');
+
+    });
+
+    // css､addClass/removeClassを使おう
+    $(function(){
+        // セレクタ・メソッド
+        // css設定　取得
+        $('p').addClass('myStyle');
+    });
+
+    //  attr､dataを使ってみよう
+    $(function(){
+        // セレクタ・メソッド
+        // attr
+        $('a').attr('href', 'https://google.com');
+        //
+        // // data
+        console.log($('a').data('sitename'));
+
+    });
+
+    $(function(){
+        // セレクタ・メソッド
+        // text
+        // html
+        // val
+        // remove, empty
+        $('p').text('just change');
+        $('p').html('<a href="">click me</a>');
+        console.log($('input').val());
+        $('p').remove
+    });
+
+    // 要素を追加してみよう
+    $(function(){
+        // セレクタ・メソッド
+        // before, after
+        // prepend, append -> prependTo, appendTo
+        var li = $('<li>').text('just added');
+        $('ul > li:eq(1)').before(li);
+        $('ul').append(li);
+    });
+
+    // エフェクトを使ってみよう
+    $(function(){
+        // セレクタ・メソッド
+        // hide, show
+        // fadeOut, dadeIn
+        // toggle
+        $('#box').hide('slow');
+    });
+
+    // イベントを使ってみよう
+    $(function(){
+        // click
+        // mouseover, mouseover, mouseremove
+        $('#box').click(function(){
+           alert('HIdddd');
+        });
+
+        $('#box')
+            .mouseover(function(){
+                $(this).css('background', 'green');
+            })
+    });
+
+    // focus､blur､changeを使おう
+    $(function(){
+        // focus, blur
+        // change
+        $('#name').focus(function(){
+           $(this).css('background', 'red');
+        });
+    });
+
+    // onメソッドを使ってみよう
+    $(function(){
+        $('button').click(function(){
+           var p = $('<p>').text('vanish!').addClass('vanish');
+           $(this).before(p);
+        });
+
+        $('.vanish').click(function(){
+            var p = $('<p>').text('vanish!').addClass('vanish');
+            $(this).remove(p);
+        });
+
+        $('body').on('click', '.vanish', function(){
+            $(this).remove();
+        // });
+    });
+
+    // Ajax
+    $(function(){
+        // サーバーと通信　ページの書き換え
+        // 非同期
+        // $.post
+        // $.get
+        $('button').click(function(){
+            // $('#result').load('more.html');
+            $('#result').load('more.html', function(){
+                // more.htmlのID : message
+                $('message').css('color', 'red');
+            })
+        });
+    });
+
+    // Ajax get
+    $(function(){
+        // サーバーと通信　ページの書き換え
+        // 非同期
+        // $.post
+        // $.get
+        $('#greet').click(function(){
+            $.get('greet.php', {
+                name: $('#name').val();
+            }, function(data) {
+                $('#result').html(data);
+            });
+        });
+    });
+
+    // JSONで値を返してみよう
+    $(function(){
+        $('#greet').click(function(){
+            $.get('greet.php', {
+                name: $('#name').val();
+        }, function(data) {
+                $('#result').html(data.message + '(' + data.length);
+            });
+        });
+    });
+</script>
+</body>
+</html>
