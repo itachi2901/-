@@ -1,0 +1,7 @@
+<div class="field">
+  <%= f.label :addresses, "住所" %><br />
+  <%= f.fields_for :addresses do |builder| %>
+    <%= render "address_fields", f: builder %>
+  <% end %>
+  <%= link_to_add_fields "住所追加", f, :addresses %>
+</div>
